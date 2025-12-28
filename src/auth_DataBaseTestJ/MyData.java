@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Duration;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,122 +18,119 @@ import org.testng.annotations.Test;
 
 public class MyData {
 
-	WebDriver driver = new ChromeDriver();
+	// global data
+	WebDriver driver;
 	String theWebSite = "https://automationteststore.com/";
 	String theSignUpPage = "https://automationteststore.com/index.php?rt=account/create";
-
+	String TheLoginPage = "https://automationteststore.com/index.php?rt=account/login";
+	String welcomeBackMssg;
+	 String userPassword = "123@Abc";
+	
+	
+	Random rand =new Random();
+	int randomEmailNumber=rand.nextInt(999);
+	int randomLoginNameNumber=rand.nextInt(999);
+	//Data Base
 	Connection con;
 	Statement stmt;
-	ResultSet rs;// only used once with a query READ type only 
+	ResultSet rs;// only used once with a query READ type only
 
-	  int customerNumberInDataBase;
-    String customerFirstNameInDataBase;
-			String customerLastNameInDataBase;
-			  String email;
-			    String password;
+	// data in the database
+	int customerNumberInDataBase;
+	String customerFirstNameInDataBase;
+	String customerLastNameInDataBase;
+	String theEmail;
+	String thephone;
+	
+	String customerCountryInDataBase;
+
+	String addressLine1;
+	String zipcode;
+	String loginName;
+	
 
 	@BeforeTest
 	public void mySetUp() throws SQLException {
-		driver.get(theSignUpPage);
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/classicmodels", "root", "Juman@mysql01");
 
+		driver = new ChromeDriver();
+		driver.get(theWebSite);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
 	}
 
-	@Test(priority=1)
+	@Test(priority = 1)
 	public void addData() throws SQLException {
 
-		String query = "INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)"  
-		+ "VALUES (999,'Random Company','Ali','Ahmad','0791234567','45 Rue Royale', NULL, 'Nantes', NULL,'44000', 'France',1370, 21000)";
+		String query = "INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)"
+				+ "VALUES (999,'Random Company','Ali','Ahmad','0791234567','45 Rue Royale', NULL, 'Nantes', NULL,'44000', 'Spain',1370, 21000)";
 
 		stmt = con.createStatement();
 
-//		    con → database connection (Connection)
-//
-//		    createStatement() → creates a Statement object
-//
-//		    stmt is used to send SQL commands to the database
 
-		int rowInserted = stmt.executeUpdate(query); // how much rows got affected
+		int rowInserted = stmt.executeUpdate(query); 
 
-//		    executeUpdate(query):
-//
-//		    	Executes INSERT / UPDATE / DELETE
-//
-//		    	Returns an int
-//		    	1 → one row inserted successfully ✅
-//
-//		    	0 → nothing inserted ❌
 
 		Assert.assertEquals(rowInserted, 1, "Record was NOT inserted into the database");
 
 	}
-	
+
 	@Test(priority = 3)
 	public void readData() throws SQLException {
 
-		  String query = "SELECT * FROM customers WHERE customerNumber = 999";
+		String query = "SELECT * FROM customers WHERE customerNumber = 999";
 
-		    stmt = con.createStatement();
-		    
-		    rs = stmt.executeQuery(query);//read does not excuteupdate [changes] <<diff
+		stmt = con.createStatement();
 
+		rs = stmt.executeQuery(query);
+
+		while (rs.next()) {
+
+			customerNumberInDataBase = rs.getInt("customerNumber");
+
+			customerFirstNameInDataBase = rs.getString("contactFirstName").toString().trim();
+																								
+																								
+
+			customerLastNameInDataBase = rs.getString("contactLastName").toString().trim();
+
+			customerCountryInDataBase = rs.getString("country").toString().trim();
+
+			theEmail = customerFirstNameInDataBase + customerLastNameInDataBase+randomEmailNumber+ "@gmail.com";
+			
+			thephone =rs.getString("phone").toString().trim();
+			
 		
+
+			addressLine1 = rs.getString("addressLine1").toString().trim();
+
+			zipcode=rs.getString("postalCode").toString().trim();
 			
-			while (rs.next()) {//as long as there is data to read [cuz the rs returns a boolean value]
-
-		        customerNumberInDataBase = rs.getInt("customerNumber");
-
-		        customerFirstNameInDataBase =
-		                rs.getString("contactFirstName").toString().trim();//trim() is for trimming the uneeded  space in the last 
-
-		        customerLastNameInDataBase =
-		                rs.getString("contactLastName").toString().trim();
-		    
-		        email = customerFirstNameInDataBase + customerLastNameInDataBase + "@gmail.com";
-		        password = "123@Abc";
-		        
-		    System.out.println(customerNumberInDataBase);
-		    System.out.println(customerFirstNameInDataBase);
-		    System.out.println(customerLastNameInDataBase);
-
-		    System.out.println(email);
-		    System.out.println(password);
-			}
+			loginName=customerFirstNameInDataBase+randomLoginNameNumber;
 			
-			//to send the data
-			driver.findElement(By.id("AccountFrm_firstname"))
-	        .sendKeys(customerFirstNameInDataBase);
-
-	driver.findElement(By.id("AccountFrm_lastname"))
-	        .sendKeys(customerLastNameInDataBase);
-
-	driver.findElement(By.id("AccountFrm_email"))
-	        .sendKeys(email);
-
-//	driver.findElement(By.id("customer[password]"))
-//	        .sendKeys(password);
+			welcomeBackMssg="Welcome back "+customerFirstNameInDataBase;
+			
+		}
 
 	}
 
 	@Test(priority = 2)
 	public void updateData() throws SQLException {
 
-		 String query = "UPDATE customers SET contactLastName = 'Assad' WHERE customerNumber = 999";
+		String query = "UPDATE customers SET contactLastName = 'Assad' WHERE customerNumber = 999";
 
-	    stmt = con.createStatement();
-	    int rowInserted = stmt.executeUpdate(query);
+		stmt = con.createStatement();
+		int rowInserted = stmt.executeUpdate(query);
 	}
-	
+
 	@Test(priority = 4)
 	public void deleteData() throws SQLException {
 		String query = "DELETE FROM customers WHERE customerNumber = 999";
-	    stmt = con.createStatement();
-	    int rowInserted = stmt.executeUpdate(query);
+		stmt = con.createStatement();
+		int rowInserted = stmt.executeUpdate(query);
 	}
-	
 
 	@AfterTest
 	public void muAfterTest() {

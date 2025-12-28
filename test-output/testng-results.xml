@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="1" total="8" passed="7" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-12-28T18:59:18 EET" name="Default suite" finished-at="2025-12-28T18:59:41 EET" duration-ms="23244">
+    <groups>
+    </groups>
+    <test started-at="2025-12-28T18:59:18 EET" name="Default test" finished-at="2025-12-28T18:59:41 EET" duration-ms="23244">
+      <class name="auth_DataBaseTestJ.MyTestCases">
+        <test-method is-config="true" signature="mySetUp()[pri:0, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:18 EET" name="mySetUp" finished-at="2025-12-28T18:59:24 EET" duration-ms="5954" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mySetUp -->
+        <test-method signature="addData()[pri:1, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:24 EET" name="addData" finished-at="2025-12-28T18:59:24 EET" duration-ms="62" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addData -->
+        <test-method signature="updateData()[pri:2, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:24 EET" name="updateData" finished-at="2025-12-28T18:59:24 EET" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateData -->
+        <test-method signature="readData()[pri:3, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:24 EET" name="readData" finished-at="2025-12-28T18:59:24 EET" duration-ms="83" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- readData -->
+        <test-method signature="deleteData()[pri:4, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:24 EET" name="deleteData" finished-at="2025-12-28T18:59:24 EET" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteData -->
+        <test-method signature="signUp()[pri:5, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:24 EET" name="signUp" finished-at="2025-12-28T18:59:34 EET" duration-ms="10298" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- signUp -->
+        <test-method signature="logout()[pri:6, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:34 EET" name="logout" finished-at="2025-12-28T18:59:39 EET" duration-ms="4105" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- logout -->
+        <test-method signature="login()[pri:7, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:39 EET" name="login" finished-at="2025-12-28T18:59:41 EET" duration-ms="2519" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method is-config="true" signature="myAfterTest()[pri:0, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:41 EET" name="myAfterTest" finished-at="2025-12-28T18:59:41 EET" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- myAfterTest -->
+        <test-method is-config="true" signature="muAfterTest()[pri:0, instance:auth_DataBaseTestJ.MyTestCases@3bf7ca37]" started-at="2025-12-28T18:59:41 EET" name="muAfterTest" finished-at="2025-12-28T18:59:41 EET" depends-on-methods="auth_DataBaseTestJ.MyTestCases.myAfterTest" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- muAfterTest -->
+      </class> <!-- auth_DataBaseTestJ.MyTestCases -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
